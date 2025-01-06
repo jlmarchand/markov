@@ -120,7 +120,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 .body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
 .footnote-ref a::before { content: "["; }
 .footnote-ref a::after { content: "]"; }
-.footnotes::before {
+section.footnotes::before {
   content: "";
   display: block;
   max-width: 20em;
@@ -243,12 +243,10 @@ html:fullscreen {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/css/key-buttons.min.css,npm/@xiee/utils/css/heading-anchor.min.css">
 </head>
 <body>
-<div class="include-before">
-</div>
 <div class="frontmatter">
 <div class="title"><h1>Chaînes de Markov</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>11/10/2023</h3></div>
+<div class="date"><h3>06/01/2025</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -264,16 +262,7 @@ html:fullscreen {
 </li>
 <li><a href="#cha-ne-de-markov"><span class="section-number">2.</span> Chaîne de Markov</a>
 <ul>
-<li><a href="#el-ments-importants"><span class="section-number">2.1</span> Eléments importants</a>
-<ul>
-<li><a href="#exemple-1-temps-discret-espace-d-tats-fini_1">Exemple 1 : temps discret, espace d’états fini</a></li>
-<li><a href="#exemple-1-temps-discret-espace-d-tats-fini_2">Exemple 1 : temps discret, espace d’états fini</a></li>
-<li><a href="#exemple-2-temps-continu-espace-d-tats-fini">Exemple 2 : temps continu, espace d’états fini</a></li>
-<li><a href="#exemple-3-temps-discret-espace-d-tats-infini-d-nombrable">Exemple 3 : temps discret, espace d’états infini dénombrable</a></li>
-<li><a href="#exemple-4-temps-discret-espace-d-tats-infini-ind-nombrable">Exemple 4 : temps discret, espace d’états infini indénombrable</a></li>
-<li><a href="#exemple-5-temps-continu-espace-d-tats-infini-ind-nombrable">Exemple 5 : temps continu, espace d’états infini indénombrable </a></li>
-</ul>
-</li>
+<li><a href="#el-ments-importants"><span class="section-number">2.1</span> Eléments importants</a></li>
 </ul>
 </li>
 <li><a href="#cha-ne-de-markov-espace-d-tats-fini"><span class="section-number">3.</span> Chaîne de Markov à espace d’états fini</a>
@@ -281,29 +270,12 @@ html:fullscreen {
 <li><a href="#un-peu-de-formalisme"><span class="section-number">3.1</span> Un peu de formalisme</a></li>
 <li><a href="#cha-ne-homog-ne"><span class="section-number">3.2</span> Chaîne homogène</a></li>
 <li><a href="#matrice-de-passage"><span class="section-number">3.3</span> Matrice de passage</a></li>
-<li><a href="#utilisation-de-la-matrice-de-passage"><span class="section-number">3.4</span> Utilisation de la matrice de passage</a>
-<ul>
-<li><a href="#des-exemples-et-des-remarques_1">Des exemples et des remarques</a></li>
-<li><a href="#des-exemples-et-des-remarques_2">Des exemples et des remarques</a></li>
-</ul>
-</li>
-<li><a href="#classification-des-tats"><span class="section-number">3.5</span> Classification des états</a>
-<ul>
-<li><a href="#d-un-tat-un-autre"><span class="section-number">3.5.1</span> D’un état à un autre</a></li>
-<li><a href="#etat-absorbant"><span class="section-number">3.5.2</span> Etat absorbant</a></li>
-<li><a href="#comportement-limite-des-cha-nes-absorbantes"><span class="section-number">3.5.3</span> Comportement limite des chaînes absorbantes</a></li>
-<li><a href="#etat-r-current-et-tat-transient"><span class="section-number">3.5.4</span> Etat récurrent et état transient</a></li>
-<li><a href="#propri-t-s-de-la-r-currence-et-de-la-transience"><span class="section-number">3.5.5</span> Propriétés de la récurrence et de la transience</a></li>
-</ul>
-</li>
+<li><a href="#utilisation-de-la-matrice-de-passage"><span class="section-number">3.4</span> Utilisation de la matrice de passage</a></li>
+<li><a href="#classification-des-tats"><span class="section-number">3.5</span> Classification des états</a></li>
 <li><a href="#what-else"><span class="section-number">3.6</span> What else ?</a></li>
 <li><a href="#dernier-d-tail-r-gler"><span class="section-number">3.7</span> Dernier détail à régler</a></li>
 <li><a href="#p-riodicit"><span class="section-number">3.8</span> Périodicité</a></li>
-<li><a href="#le-candidat"><span class="section-number">3.9</span> Le candidat</a>
-<ul>
-<li><a href="#cons-quences"><span class="section-number">3.9.1</span> Conséquences</a></li>
-</ul>
-</li>
+<li><a href="#le-candidat"><span class="section-number">3.9</span> Le candidat</a></li>
 <li><a href="#premier-bilan"><span class="section-number">3.10</span> Premier bilan</a></li>
 <li><a href="#au-final"><span class="section-number">3.11</span> Au final</a></li>
 </ul>
@@ -311,12 +283,7 @@ html:fullscreen {
 <li><a href="#cha-ne-de-markov-espace-d-tats-infini-d-nombrable"><span class="section-number">4.</span> Chaîne de Markov à espace d’états infini dénombrable</a>
 <ul>
 <li><a href="#les-changements"><span class="section-number">4.1</span> Les changements</a></li>
-<li><a href="#deux-types-de-r-currences"><span class="section-number">4.2</span> Deux types de récurrences</a>
-<ul>
-<li><a href="#exemple-la-marche-al-atoire-sur-mathbb-z"><span class="section-number">4.2.1</span> Exemple : la marche aléatoire sur (\mathbb Z)</a></li>
-<li><a href="#what-s-the-difference"><span class="section-number">4.2.2</span> What’s the difference ?</a></li>
-</ul>
-</li>
+<li><a href="#deux-types-de-r-currences"><span class="section-number">4.2</span> Deux types de récurrences</a></li>
 <li><a href="#th-or-mes"><span class="section-number">4.3</span> Théorèmes</a></li>
 </ul>
 </li>
@@ -669,7 +636,7 @@ $$PGCD(4,6,8)=2,\quad PGCD(36,96,48,24)=12,\quad PGCD(96,48,24)=24$$</li>
 <blockquote>
 <h4 id="d-finition-la-p-riode-d-un-tat-i-est-donn-e-par"><span class="section-number">3.8.0.1</span> Définition : la <strong>période</strong> d’un état \(i\) est donnée par</h4>
 </blockquote>
-<p>$$d(i)=PGCD(n\geq 1\colon (P^n)_{ii}&gt;0$$
+<p>$$d(i)=PGCD\big(n\geq 1\colon (P^n)_{ii}&gt;0\Big)$$
 si \(d(i)\geq 2\), l’état est <strong>périodique</strong> de période \(d(i)\) sinon (lorsque \(d(i)=1\)) l’état est dit <strong>apériodique</strong>. Une chaîne <strong>apériodique</strong> est une chaîne dont tous les états sont apériodiques.</p>
 <ul>
 <li>par exemple :<br />
@@ -782,8 +749,6 @@ Si  la chaine est  <strong>irréductible récurrente nulle</strong>, il n’exis
 alors, pour toute mesure initiale \(\mu\) et pour tout état \(i\)
 $$lim_{n\to\infty} \mathbb P(X_n = i) = \pi(i).$$</p>
 </div>
-<div class="include-after">
-</div>
 <script>
 (function(d) {
   let p = d.body;  // container of slides; assume <body> for now
@@ -858,9 +823,9 @@ $$lim_{n\to\infty} \mathbb P(X_n = i) = \pi(i).$$</p>
     if (fn) s.querySelectorAll('.footnote-ref > a[href^="#fn"]').forEach(a => {
       const li = fn.querySelector('li' + a.getAttribute('href'));
       if (!li) return;
-      let f = s.querySelector('div.footnotes');
+      let f = s.querySelector('section.footnotes');
       if (!f) {
-        f = newEl('div', 'footnotes'); s.append(f);
+        f = newEl('section', 'footnotes'); s.append(f);
       }
       f.append(li);
       li.firstElementChild?.insertAdjacentHTML('afterbegin', `[${a.innerHTML}] `);
@@ -923,7 +888,7 @@ $$lim_{n\to\infty} \mathbb P(X_n = i) = \pi(i).$$</p>
   // start timer on fullscreen
   d.onfullscreenchange = (e) => d.fullscreenElement && !t0 && startTimers();
   tms.forEach(el => el.addEventListener('click', e => startTimers()));
-  // restore previsouly saved body class
+  // restore previously saved body class
   const bc = sessionStorage.getItem('body-class');
   if (bc) d.body.className += ' ' + bc;
 })(document);
