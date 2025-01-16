@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0060)https://www.idpoisson.fr/berglund/probamass_html/node18.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Chaînes de Markov absorbantes</title>
+<meta name="description" content="Chaînes de Markov absorbantes">
+<meta name="keywords" content="probamass_html">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+
+<meta name="Generator" content="LaTeX2HTML v99.2beta8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="STYLESHEET" href="./Chaînes de Markov absorbantes_files/probamass_html.css">
+
+<link rel="next" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">
+<link rel="previous" href="https://www.idpoisson.fr/berglund/probamass_html/node17.html">
+<link rel="up" href="https://www.idpoisson.fr/berglund/probamass_html/node14.html">
+<link rel="next" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html268" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">
+<img width="37" height="24" align="BOTTOM" border="0" alt="next" src="file:///usr/lib/latex2html/icons/next.png"></a> 
+<a name="tex2html264" href="https://www.idpoisson.fr/berglund/probamass_html/node14.html">
+<img width="26" height="24" align="BOTTOM" border="0" alt="up" src="file:///usr/lib/latex2html/icons/up.png"></a> 
+<a name="tex2html258" href="https://www.idpoisson.fr/berglund/probamass_html/node17.html">
+<img width="63" height="24" align="BOTTOM" border="0" alt="previous" src="file:///usr/lib/latex2html/icons/prev.png"></a> 
+<a name="tex2html266" href="https://www.idpoisson.fr/berglund/probamass_html/node1.html">
+<img width="65" height="24" align="BOTTOM" border="0" alt="contents" src="file:///usr/lib/latex2html/icons/contents.png"></a>  
+<br>
+<b> Next:</b> <a name="tex2html269" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">Chaînes de Markov ergodiques</a>
+<b> Up:</b> <a name="tex2html265" href="https://www.idpoisson.fr/berglund/probamass_html/node14.html">Introduction aux processus stochastiques</a>
+<b> Previous:</b> <a name="tex2html259" href="https://www.idpoisson.fr/berglund/probamass_html/node17.html">Les chaînes de Markov</a>
+ &nbsp; <b>  <a name="tex2html267" href="https://www.idpoisson.fr/berglund/probamass_html/node1.html">Contents</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION00440000000000000000"></a>
+<a name="sec_cma"></a>
+<br>
+Chaînes de Markov absorbantes
+</h1>
+
+<p>
+<br>
+<a name="def_cma1"></a><img width="555" height="127" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img649.png" alt="\begin{definition}[Cha\^\i ne de Markov absorbante]\hfill
+\begin{itemiz}
+\item U...
+...i ne non absorbante est dite\/ \defwd{transiente}.
+\end{itemiz}\end{definition}">
+<br>
+
+</p><p>
+Il est commode de renuméroter les états d'une chaîne absorbante, en
+plaçant d'abord les états non absorbants, ensuite les états
+absorbants. Dans ce cas, on dira que la matrice de transition est écrite
+sous forme canonique
+</p><p></p>
+<div align="CENTER"><a name="cma1"></a><!-- MATH
+ \begin{equation}
+P =
+\begin{pmatrix}
+Q & R \\0 & I
+\end{pmatrix}\;. 
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="122" height="60" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img650.png" alt="$\displaystyle P = \begin{pmatrix}Q &amp; R \\  0 &amp; I \end{pmatrix}\;.$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.47)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+S'il y a <img width="13" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img651.png" alt="$ r$"> états absorbants, <img width="18" height="32" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img652.png" alt="$ Q$"> est une matrice de taille
+<!-- MATH
+ $(m-r)\times(m-r)$
+ -->
+<img width="143" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img653.png" alt="$ (m-r)\times(m-r)$">, <img width="18" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img263.png" alt="$ R$"> est une matrice de taille <!-- MATH
+ $(m-r)\times r$
+ -->
+<img width="93" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img654.png" alt="$ (m-r)\times r$"> et <img width="13" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img557.png" alt="$ I$"> est
+la matrice identité de taille <img width="13" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img651.png" alt="$ r$">. 
+
+<p>
+<br>
+<a name="cma3"></a><a name="cma2"></a><a name="ex_cma1"></a><img width="554" height="280" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img655.png" alt="\begin{example}
+% latex2html id marker 3734Dans l&#39;Exemple~\ref{ex_markov2} de ...
+...trix}
+1/2 &amp; 0 \\
+0 &amp; 0 \\
+0 &amp; 1/2
+\end{pmatrix}\;.
+\end{equation}\end{example}">
+<br>
+
+</p><p>
+Pour la matrice sous forme canonique&nbsp;(<a href="https://www.idpoisson.fr/berglund/probamass_html/node18.html#cma1">3.4.1</a>),  on vérifie facilement
+par récurrence que 
+</p><p></p>
+<div align="CENTER"><a name="cma4"></a><!-- MATH
+ \begin{equation}
+P^n =
+\begin{pmatrix}
+Q^n & \brak{I+Q+\dots+Q^{n-1}} R \\0 & I
+\end{pmatrix}\;.
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="297" height="60" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img656.png" alt="$\displaystyle P^n = \begin{pmatrix}Q^n &amp; \brak{I+Q+\dots+Q^{n-1}} R \\  0 &amp; I \end{pmatrix}\;.$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.48)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+Pour comprendre le comportement à grand temps de la chaîne, il faut
+étudier l'évolution  de cette matrice pour <!-- MATH
+ $n\to\infty$
+ -->
+<img width="59" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img112.png" alt="$ n\to\infty$">. 
+
+<p>
+<br>
+<a name="cma5"></a><a name="prop_cma1"></a><img width="553" height="46" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img657.png" alt="\begin{prop}
+Pour une cha\^\i ne de Markov absorbante,
+\begin{equation}
+\lim_{n\to\infty} Q^n = 0\;.
+\end{equation}\end{prop}">
+<br>
+</p><p></p>
+<div><i>D´<small>EMONSTRATION</small></i>.
+
+Soit <img width="10" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img95.png" alt="$ i$"> un état non absorbant (<!-- MATH
+ $i\leqs m-r$
+ -->
+<img width="79" height="31" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img658.png" alt="$ i\leqs m-r$">).  L'élément de matrice
+<!-- MATH
+ $(Q^n)_{ij}$
+ -->
+<img width="52" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img659.png" alt="$ (Q^n)_{ij}$"> de <img width="27" height="32" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img660.png" alt="$ Q^n$"> est la probabilité de se trouver dans l'état non
+absorbant <img width="13" height="31" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img661.png" alt="$ j$">, après <img width="15" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img41.png" alt="$ n$"> pas, partant de <img width="10" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img95.png" alt="$ i$">. Par conséquent,
+<!-- MATH
+ $(Q^n)_{ij}$
+ -->
+<img width="52" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img659.png" alt="$ (Q^n)_{ij}$"> est inférieur ou égal à la probabilité de ne par avoir
+atteint d'état absorbant en <img width="15" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img41.png" alt="$ n$"> pas. Soit 
+<p></p>
+<div align="CENTER"><a name="cma6:1"></a><!-- MATH
+ \begin{equation}
+m_i = \min\setsuch{k\geqs1}{\exists  \ell>m-r,\,(P^k)_{i\ell}>0}
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="322" height="40" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img662.png" alt="$\displaystyle m_i = \min\setsuch{k\geqs1}{\exists \ell&gt;m-r,\,(P^k)_{i\ell}&gt;0}$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.49)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+le nombre minimal de pas nécessaire à atteindre un état absorbant
+<img width="12" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img448.png" alt="$ \ell$"> depuis <img width="10" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img95.png" alt="$ i$">. Soit 
+<p></p>
+<div align="CENTER"><a name="cma6:2"></a><!-- MATH
+ \begin{equation}
+p_i = \probin{i}{X_{m_i}\leqs m-r} < 1
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="209" height="39" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img663.png" alt="$\displaystyle p_i = \probin{i}{X_{m_i}\leqs m-r} &lt; 1$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.50)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+la probabilité de ne pas atteindre d'état absorbant en <img width="25" height="30" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img664.png" alt="$ m_i$"> pas,
+partant de <img width="10" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img95.png" alt="$ i$">. Soit enfin 
+<p></p>
+<div align="CENTER"><a name="cma6:3"></a><!-- MATH
+ \begin{equation}
+M = \max_{i=1,\dots,m-r} m_i\;,
+\qquad
+p = \max_{i=1,\dots,m-r} p_i\;.
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="315" height="39" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img665.png" alt="$\displaystyle M = \max_{i=1,\dots,m-r} m_i\;, \qquad p = \max_{i=1,\dots,m-r} p_i\;.$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.51)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+Alors la probabilité de ne pas atteindre d'état absorbant en <img width="23" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img666.png" alt="$ M$"> pas,
+partant de n'importe quel état non absorbant, est bornée par <img width="13" height="30" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img667.png" alt="$ p$">. Il
+suit que la probabilité de ne pas atteindre d'état absorbant en <img width="33" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img668.png" alt="$ Mk$">
+pas est bornée par <img width="21" height="38" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img669.png" alt="$ p^k$">. Cette probabilité tend vers 0 lorsque <img width="14" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img51.png" alt="$ k$">
+tend vers l'infini. La probabilité de ne pas être absorbé après un
+nombre arbitraire <img width="12" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img448.png" alt="$ \ell$"> de pas étant une fonction décroissante de
+<img width="12" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img448.png" alt="$ \ell$">, elle tend nécessairement vers 0. Par conséquent, <!-- MATH
+ $(Q^n)_{ij}$
+ -->
+<img width="52" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img659.png" alt="$ (Q^n)_{ij}$">
+tend vers zéro lorsque <img width="15" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img41.png" alt="$ n$"> tend vers l'infini, pour tout
+<!-- MATH
+ $j\in\set{1,\dots,r}$
+ -->
+<img width="107" height="34" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img670.png" alt="$ j\in\set{1,\dots,r}$">.  
+ <img width="18" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img17.png" alt="$ \qedsymbol$">
+</div><p></p>
+
+<p>
+Montrons maintenant que la matrice <img width="18" height="32" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img652.png" alt="$ Q$"> permet de déterminer le nombre
+moyen de passages dans chaque état non absorbant, avant de finir par
+atteindre un état absorbant. 
+
+</p><p>
+<br>
+<a name="cma8"></a><a name="cma7"></a><a name="thm_cma1"></a><img width="556" height="175" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img671.png" alt="\begin{theorem}
+Soit $P$\ la matrice de transition d&#39;une cha\^\i ne de Markov ab...
+...sum_{k\geqs0}\indexfct{X_k=j}}{X_0=i}\;.
+\end{equation}\end{enum}
+\end{theorem}">
+<br>
+</p><p></p>
+<div><i>D´<small>EMONSTRATION</small></i>.
+
+<br>
+<a name="cma9:8"></a><a name="cma9:7"></a><a name="cma9:6"></a><a name="cma9:5"></a><a name="cma9:4"></a><a name="cma9:3"></a><a name="cma9:2"></a><a name="cma9:1"></a><img width="548" height="503" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img672.png" alt="\begin{enum}
+\item Supposons que $x$\ soit un vecteur tel que $Qx=x$, c&#39;est-\\lq a-...
+...}Y_k} = \sum_{k\geqs0}(Q^k)_{ij} = (N)_{ij} =
+n_{ij}\;.
+\end{equation}\end{enum}">
+<br> <img width="18" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img17.png" alt="$ \qedsymbol$">
+</div><p></p>
+
+<p>
+<br>
+<a name="def_cma2"></a><img width="555" height="36" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img673.png" alt="\begin{definition}[Matrice fondamentale]
+$N$\ est appel\&#39;ee la\/ \defwd{matrice fondamentale}\/ de la cha\^\i ne de
+matrice de transition $P$.
+\end{definition}">
+<br>
+
+</p><p>
+En utilisant les relations&nbsp;(<a href="https://www.idpoisson.fr/berglund/probamass_html/node18.html#cma5">3.4.5</a>) et&nbsp;(<a href="https://www.idpoisson.fr/berglund/probamass_html/node18.html#cma7">3.4.9</a>) dans
+l'expression&nbsp;(<a href="https://www.idpoisson.fr/berglund/probamass_html/node18.html#cma4">3.4.4</a>) de <img width="27" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img674.png" alt="$ P^n$">, on obtient 
+</p><p></p>
+<div align="CENTER"><a name="cma9:A"></a><!-- MATH
+ \begin{equation}
+\lim_{n\to\infty }P^n =
+\begin{pmatrix}
+0 & N R \\0 & I
+\end{pmatrix}\;.
+\end{equation}
+ -->
+<table cellpadding="0" width="100%" align="CENTER">
+<tbody><tr valign="MIDDLE">
+<td nowrap="" align="CENTER"><img width="181" height="60" align="MIDDLE" border="0" src="./Chaînes de Markov absorbantes_files/img675.png" alt="$\displaystyle \lim_{n\to\infty }P^n = \begin{pmatrix}0 &amp; N R \\  0 &amp; I \end{pmatrix}\;.$"></td>
+<td nowrap="" width="10" align="RIGHT">
+(3.52)</td></tr>
+</tbody></table></div>
+<br clear="ALL"><p></p>
+La matrice <img width="34" height="16" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img676.png" alt="$ NR$"> devrait donc décrire les probabilités de transition
+d'un état non absorbant vers un état absorbant, en un nombre arbitraire
+de pas. Il nous reste également à caractériser le temps s'écoulant
+jusqu'à ce que le processus ait atteint un état absorbant. Son
+espérance peut aussi  être déduite de la matrice <img width="20" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img432.png" alt="$ N$">. 
+
+<p>
+<br>
+<a name="cma13"></a><a name="cma12"></a><a name="cma11"></a><a name="cma10"></a><a name="thm_cpa2"></a><img width="562" height="356" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img677.png" alt="\begin{theorem}
+Soit $N$\ la matrice fondamentale d&#39;une cha\^\i ne de Markov abs...
+... de la matrice
+\begin{equation}
+B = NR\;.
+\end{equation}\end{enum}\end{theorem}">
+<br>  
+</p><p></p>
+<div><i>D´<small>EMONSTRATION</small></i>.
+
+<br>
+<a name="cma14:1"></a><img width="548" height="462" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img678.png" alt="\begin{enum}
+\item On a
+\begin{align}
+\nonumber
+\sum_{j=1}^{m-r} n_{ij}
+&amp;= \sum...
+...)_{iq} = (NR)_{iq}\;,
+\end{align}ce qui montre qu&#39;on a bien $B=NR$.
+\end{enum}">
+<br> <img width="18" height="15" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img17.png" alt="$ \qedsymbol$">
+</div><p></p>
+
+<p>
+<br>
+<a name="cma20"></a><a name="cma19"></a><a name="cma18"></a><a name="cma17"></a><a name="cma16"></a><a name="cma15"></a><a name="ex_cma2"></a><img width="555" height="629" align="BOTTOM" border="0" src="./Chaînes de Markov absorbantes_files/img679.png" alt="\begin{example}
+Rappelons que pour l&#39;exemple de la marche de l&#39;ivrogne, on a
+\b...
+... les probabilit\&#39;es respectives de finir au bar ou \\lq a la maison.
+\end{example}">
+<br>
+
+</p><p>
+</p><hr>
+<!--Navigation Panel-->
+<a name="tex2html268" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">
+<img width="37" height="24" align="BOTTOM" border="0" alt="next" src="file:///usr/lib/latex2html/icons/next.png"></a> 
+<a name="tex2html264" href="https://www.idpoisson.fr/berglund/probamass_html/node14.html">
+<img width="26" height="24" align="BOTTOM" border="0" alt="up" src="file:///usr/lib/latex2html/icons/up.png"></a> 
+<a name="tex2html258" href="https://www.idpoisson.fr/berglund/probamass_html/node17.html">
+<img width="63" height="24" align="BOTTOM" border="0" alt="previous" src="file:///usr/lib/latex2html/icons/prev.png"></a> 
+<a name="tex2html266" href="https://www.idpoisson.fr/berglund/probamass_html/node1.html">
+<img width="65" height="24" align="BOTTOM" border="0" alt="contents" src="file:///usr/lib/latex2html/icons/contents.png"></a>  
+<br>
+<b> Next:</b> <a name="tex2html269" href="https://www.idpoisson.fr/berglund/probamass_html/node19.html">Chaînes de Markov ergodiques</a>
+<b> Up:</b> <a name="tex2html265" href="https://www.idpoisson.fr/berglund/probamass_html/node14.html">Introduction aux processus stochastiques</a>
+<b> Previous:</b> <a name="tex2html259" href="https://www.idpoisson.fr/berglund/probamass_html/node17.html">Les chaînes de Markov</a>
+ &nbsp; <b>  <a name="tex2html267" href="https://www.idpoisson.fr/berglund/probamass_html/node1.html">Contents</a></b> 
+<!--End of Navigation Panel-->
+<address>
+berglund
+2005-11-28
+</address>
+
+
+</body></html>

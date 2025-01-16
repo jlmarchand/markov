@@ -1,0 +1,524 @@
+---
+title: Processus markovien avec continuité d'espace et/ou de temps 
+author: "JL Marchand"
+date: "16/01/2025"
+output:
+  markdown::html_format:
+    meta:
+      css: [default, snap, "@npm/@xiee/utils/css/key-buttons.min.css,heading-anchor.min.css"]
+      js: [snap, "@npm/@xiee/utils/js/key-buttons.min.js,external-link.min.js,heading-anchor.min.js"]
+    options:
+      toc: 
+        depth: 3
+      number_sections: true
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{pgf,tikz}
+- \usepackage[usenames,dvipsnames]{xcolor}
+- \usetikzlibrary{arrows}
+- \usepackage{pgfplots,filecontents}
+- \usetikzlibrary{calc}
+- \usetikzlibrary{patterns}
+
+---
+
+```{=html}
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Making HTML Slides with the markdown Package}
+%\VignetteEncoding{UTF-8}
+-->
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(plotly)
+library(latex2exp)
+library(kableExtra)
+library(htmltools)
+#library(RefManageR)
+```
+
+```{css, echo=FALSE}
+/* your CSS rules */
+body {
+  background-image: url("3647528.jpg");
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: middle center;
+  background-size: 2100px;
+  color: #272822;
+}
+blockquote {
+  border-left: solid 5px #f8ac0080;
+  padding-left: 1em;
+  color: #272822;
+  font-style: italic;
+}
+h1 {
+  color: white;
+}
+h2, h3 {
+  color: #f8ac00;
+}
+.slide-container h2 .section-number {
+  display: inline-block;
+  background-color: #f8ac00;
+  color: white;
+  padding: 0 .1em;
+  margin-right: .3em;
+}
+strong {
+  background-color: #f8ac00;
+  color: white;
+
+}
+```
+
+```{r reference,  include=FALSE, cache=FALSE, eval = FALSE}
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "alphabetic",
+           style = "markdown",
+           hyperlink = FALSE,
+           sorting = "ydnt",
+           dashed = FALSE)
+myBib <- ReadBib("./references.bib", check = FALSE)
+```
+
+
+---
+
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+# Motivations
+
+
+---
+## Pourquoi l'espace continu ?
+
+- les avantages d'un espace continu 
+  + réalité de la mesure : position, densité, teneur, etc.
+  + utilisation de propriétés : continuité, dérivabilité, etc.
+  + allègement calculatoire : approximation continue des masses liquides
+  + ...
+- les désavantages
+  + complexité mathématique, résultats potentiellement contre-intuitifs
+  + ...
+
+---
+## Pourquoi le temps continu ?
+
+- les avantages du temps continu 
+  + possibilité d'une structure homogène du processus malgré observations à intervalles de temps non-constants
+  + reconstruction d'une dynamique entre deux temps
+  + observations à haute fréquence
+  + ...
+- les désavantages
+  + complexité du modèle potentiellement virtuelle
+  + comme pour le passage du discret au continu pour l'espace, de nouveaux problèmes plus ou moins intuitifs
+  + ...
+  
+---
+
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+# Temps continu, espace d'états fini
+
+---
+## Mettons-nous en situation
+
+- Reprenons le développement d’une forêt naturelle en région tempérée sur une parcelle en friche. Pour rappel, notre modèle simplifié comporte
+3 états $S = \{h, a, f \}$. L’état $h$ est celui d’une végétation constituée d’herbes ou d’autres espèces pionnières ; l’état $a$
+correspond à la présence d’arbustes dont le développement rapide nécessite un ensoleillement maximal et
+l’état $f$ celui d’arbres plus gros qui peuvent se développer dans un environnement semi ensoleillé. Sur la parcelle on repère au sol un grand nombre de points (un millier) répartis sur un maillage régulier et on enregistre à intervalle de temps fixé (tous les 3 ans) l’état de la végétation en chacun de ces points (en choisissant celui des trois états qui est le plus proche).
+- Le type d'observation "tous les 3 ans" nous a poussé à modéliser le processus uniquement aux temps d'observation, pour détailler plus précisément la dynamique, on pourrait également vouloir représenter le temps auquel la forêt bascule d'un état à l'autre. 
+
+```{r, echo=FALSE,out.width="800px",fig.show='hold',fig.align='center'}
+  knitr::include_graphics(c("800px-Foret.jpeg"), dpi = 100)
+```
+
+
+
+---
+
+## Temps de sortie et absence de mémoire
+
+- l'absence de mémoire d'un temps aléatoire $T$ correspond à situation sans phénomène de vieillissement :
+$$\mathbb P (T >t+s|T>t)=\mathbb P(T>s), \quad \forall s,t>0$$
+en d'autres termes si on a déjà attendu $t$ unités de temps, la probabilité de devoir attendre encore au moins $s$ unités de temps est exactement la même que dans la situation où on n'a pas encore attendu
+- un modèle courant par exemple en électronique pour modéliser le temps de vie d'un composant; en considérant deux composants de même nature, l'un ayant déjà servi, les temps restants de vie des deux composants est le même
+- une seule loi vérifie cette propriété sur $\mathbb N^*$ : la loi **géométrique** $\mathcal G(p)$, on peut faire le lien avec une chaîne homogène en temps discret, où l'on met un temps géométrique de paramètre $1-p_{ii}$ avant de sortir d'un état $i$
+- une seule loi vérifie cette propriété sur $\mathbb R^*$ : la loi **exponentielle** $\mathcal E(\lambda)$, sans surprise car il existe un lien entre les deux lois,
+  + si $X\sim \mathcal E(\lambda)$, alors l'arrondi à l'entier supérieur (*partie entière supérieure*) : $\lceil X\rceil \sim \mathcal G\left(1-e^{-\lambda}\right)$ donc $Y \sim \mathcal G(p)$ peut être vu comme l'arrondi à l'entier supérieur d'une variable de loi $\mathcal E\left(-\ln(1-p)\right)$,
+  + c'est donc de assez naturel que cette loi apparaisse comme le bon candidat à utiliser !
+
+---
+
+## La loi exponentielle
+
+- en plus de l'absence de mémoire, la loi exponentielle possède quelques autres propriétés sympathiques
+- le minimum de deux variables indépendantes de lois exponentielles de paramètres $\lambda$ et $\mu$ suit également une loi exponentielle de paramètre $\lambda + \mu$, cela se généralise à une famille finie de variables indépendantes de loi exponentielle
+
+```{r, warning=FALSE, fig.align='center', out.width = '800px', out.height= '800px', echo=FALSE, eval=TRUE}
+x <- seq(0.01, 1, by=.01)
+lx <- length(x)
+lbd <- c(.5,1 ,2,3)
+z <- outer(x,lbd,dexp)
+z <- matrix(z, ncol=1)
+df <- data.frame( x = x, lbda = factor(rep(lbd, each = lx)), z = z)
+expgf <- df %>% 
+  plot_ly(x = ~x, y = ~z, hoverinfo = "text", showlegend = FALSE) %>% 
+  layout(yaxis = list(title = "Densité"))
+expgf <- expgf %>% 
+  add_trace(frame = ~lbda, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
+  animation_opts(1000, easing = "elastic", redraw = FALSE) %>%
+  animation_button(
+    x = 1, xanchor = "right", y = 0, yanchor = "bottom"
+  ) %>%
+  animation_slider(
+    currentvalue = list(prefix = "paramètre = ", font = list(color="orange")
+)
+  )
+htmltools::save_html(expgf, file="expgf.html")  
+```
+
+<div align="center">
+<iframe src="expgf.html" width="800" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+</div>
+
+---
+
+## Chaîne de Markov à temps continu
+
+>### Définition 
+> un  **générateur** sur un espace d'états $E$, est une matrice $Q = (q_{ij})_{i,j\in E}$ vérifiant
+>  - pour tout $i\in E,\quad 0\leq -q_{ii}<+\infty$ pour tous $i\neq j,\quad q_{ij}\geq0$; on notera par la suite $q_i=-q_{ii}\in\mathbb R^+$ 
+>  - pour tout $i\in E,\quad \sum_{j\in E} q_{ij}=0$. 
+> On lui associe la matrice *stochastique* $\Pi = (\pi_{ij})_{i,j\in E}$ définie par $$\pi_{ij}=\left\{\begin{array}{lll}0 &\textrm{si} & q_{i} = 0\\\frac{q_{ij}}{q_{i}} &\textrm{si} & q_{i} \neq 0\end{array}\right. \textrm{si }j\neq i,\qquad \textrm{et}\qquad \pi_{ii}=\left\{\begin{array}{lll}1 &\textrm{si} & q_{i} = 0\\0 &\textrm{si}   &q_{i} \neq 0\end{array}\right.$$
+  
+>### Définition 
+> le processus $(X_t)_{t\geq0}$ est **une chaîne de Markov à temps continu** de générateur $Q$ si
+> - $(Y_n)_{n\geq 0}$ est une chaîne de Markov *à temps discret* de loi initiale $\mu$ et  de matrice de transition $\Pi$
+> - conditionnellement à $Y_0 = i_0, Y_1=i_1,\dots,Y_{n-1}=i_{n-1}$, les temps d'attente $S_1,S_2,\dots,S_{n}$ sont des variables aléatoires exponentielles indépendantes de paramètres respectifs $q_{i_{0}},\dots,q_{i_{n-1}}$.
+
+
+---
+## Loi de $X_t$
+
+>### Théorème 
+> si un  processus $(X_t)_{t\geq0}$ est **une chaîne de Markov à temps continu** de générateur $Q$ alors conditionnellement à $X_s=i$, le processus $(X_{s+t})_{t\geq0}$ est **une chaîne de Markov à temps continu** de générateur $Q$ issue de $i$ indépendante de $(X_{r})_{0\leq r\leq s}.$
+
+- si on appelle $p_{ij}(t) = \mathbb P(X_t=j|X_0=i)$
+  +  pour tout $t\geq 0$, $P(t) = \left(p_{ij}(t)\right)_{i,j\in E}$ est une matrice stochastique et la fonction $P$ satisfait $$P(t+s)=P(t)P(s)\quad \textrm{et}\quad P(0)=Id.$$
+  +  de plus il existe naturellement un lien avec le générateur qui justifie son appellation 
+   le semi-groupe est calculable à partir du générateur, en fait $P'(t)= P(t)Q(t)$ ainsi : $$P(t) = e^{tQ} = \sum_{n=0}^{+\infty}\frac{t^n}{n!}Q^n.$$
+  + de surcroît, pour interpréter les coefficients, il faut regarder les probabilités de transition en temps petit
+  $$\mathbb P(X_{t+h}=j|X_t=i) \stackrel{h\to 0}{\sim} q_{ij}h,\quad \textrm{si }i\neq j,\quad \textrm{et}\quad \mathbb P(X_{t+h}=i|X_t=i) \stackrel{h\to 0}{\sim} 1+q_{ii}h=1-q_ih$$
+
+
+---
+
+## Récurrence/Transience
+
+- il va falloir adapter les visions parce que compter n'est plus la solution en temps continu
+>### Définition
+> soit  $(X_t)_{t\geq0}$ est une chaîne de Markov à temps continu de générateur $Q$
+> - l'état $i$ est dit **récurrent** si $\mathbb P(\{t\geq 0, \, X_t=i\}\textrm{ non-borné }|X_0=i)=1$
+> - l'état $i$ est dit **transient** si $\mathbb P(\{t\geq 0, \, X_t=i\}\textrm{ non-borné }|X_0=i)=0$
+
+- bonne nouvelle ! on peut faire le lien avec la chaîne incluse (qui elle est à temps discret)
+>### Théorème
+> soit  $(X_t)_{t\geq0}$ est une chaîne de Markov à temps continu de générateur $Q$
+> - si $i$ est récurrent pour la chaîne incluse, alors il l'est aussi pour $X$
+> - si $i$ est transient pour la chaîne incluse, alors il l'est aussi pour $X$
+> - tout état est soit récurrent, soit transient
+> - récurrence et transience sont des propriétés de classe 
+
+---
+
+## Classification
+
+>### Théorème
+> soit  $(X_t)_{t\geq0}$ est une chaîne de Markov à temps continu de générateur $Q$, on a la dichotomie suivante
+> - si $q_{i}=0$ ou $\mathbb P(T_i<+\infty|X_0=i)=1$, alors $i$ est récurrent et $\int_0^{+\infty}p_{ii}(t)dt=+\infty$
+> - si $q_{i}>0$ et $\mathbb P(T_i<+\infty|X_0=i)<1$, alors $i$ est transient et $\int_0^{+\infty}p_{ii}(t)dt<+\infty$
+
+---
+
+## Mesure invariante
+- on peut retrouver la mesure invariante à l'aide du générateur
+>### Définition
+> on dit qu'une mesure $\lambda$ est **invariante** pour $X$ si $$\lambda Q= 0$$ (où $0$ est à comprendre comme un vecteur ligne constitué de zéros)
+
+>### Théorème
+> soit $Q$ un générateur, $\Pi$ sa matrice de saut et $\lambda$ une mesure, les deux assertions suivantes sont équivalentes
+> - la mesure $\lambda$ est invariante pour une chaîne $X$ de générateur $Q$
+> - la mesure $\mu$,  définie par $\mu_i = \lambda_iq_{i}\geq 0$ est invariante pour la chaîne incluse $\mu\Pi=\mu$
+
+>### Propriété 
+> une chaîne de Markov en temps continu irréductible récurrente possède une unique probabilité invariante
+
+---
+## Parce que la périodicité n'a plus cours
+
+- en temps continu, le piège de la périodicité n'existe plus
+
+>### Théorème
+> soit $Q$ un générateur irréductible de semi-groupe $\left(P(t)\right)_{t\geq 0}$ et  de probabilité invariante $\lambda$, alors pour tous états $i,j$,
+$$\lim_{t\to+\infty} p_{ij}(t)=\lambda_j$$
+De plus pour tout mesure initiale $\nu$,  $$ \lim_{t\to +\infty} \mathbb P(X_t=i)= \frac{1}{q_{i}\mathbb E[T_i|X_0=i]}.$$ Pour toute fonction bornée $f\colon E\rightarrow \mathbb R$,$$\lim_{t\to+\infty}\frac1t\int_0^tf(X_s)ds= \sum_{i\in E}\lambda_i f(i).$$ 
+
+---
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+# Temps continu, espace d'états infini dénombrable
+
+
+
+---
+## Mettons-nous en situation
+
+- nombres d'observations d'apparition d'un animal devant une caméra
+```{r, echo=FALSE,out.width="800px",fig.show='hold',fig.align='center'}
+  knitr::include_graphics(c("Lynx_Nationalpark_Bayerischer_Wald_02.jpg"), dpi = 100)
+```
+- hypothèse : le nouveau temps d'apparition ne dépend que du précédent
+
+
+---
+## Le danger de l'explosion
+
+- **Remarque importante** d'un point de vue mathématique il est possible qu'une succession infinie de sauts (changements d'état) surgisse en temps finie, c'est rarement un cas intéressant en modélisation
+```{r, echo=FALSE,out.width="500px",fig.show='hold',fig.align='center'}
+  knitr::include_graphics(c("artifice.jpg"), dpi = 100)
+```
+
+>### Propriété 
+> soit $(X_t)_{t\geq 0}$ un processus de Markov en temps continu de générateur $Q=(q_{ij})_{i,j\in E}$ alors n'explose pas si l'une des conditions suivantes est vérifiée
+> + $\displaystyle sup_{i\in E} q_{i} < + \infty$,
+> + $X_0=i$ et $i$ est récurrent pour la chaîne incluse.
+
+
+
+
+
+- exemple : imaginons que les seuls coefficients non-nuls soient $q_{i,i+1}=q_{i,i-1}=2^{i-1}$ et donc $q_i=-q_{ii} = 2^{i}$ pour $i\geq 0$, alors 
+
+
+
+---
+## C'est tout ?
+
+- c'est la seule préoccupation supplémentaire; pour caractériser les classes, notamment pour appliquer le théorème de convergence à l'équilibre, il faut en tenir compte
+>### Théorème
+> soit Q un générateur irréductible. Les propriétés suivantes sont équivalentes :
+> +  tous les états sont récurrents positifs
+> + il existe un état récurrent positif
+> $Q$ est non explosif et admet une probabilité invariante $\lambda$ qui charge tous les points.
+
+- le résultat de convergence devient
+>### Théorème
+> soit $Q$ un générateur irréductible **non-explosif** de semi-groupe $\left(P(t)\right)_{t\geq 0}$ et  de probabilité invariante $\lambda$, alors pour tous états $i,j$,
+$$\lim_{t\to+\infty} p_{ij}(t)=\lambda_j$$
+De plus pour tout mesure initiale $\nu$,  $$ \lim_{t\to +\infty} \mathbb P(X_t=i)= \frac{1}{q_{i}\mathbb E[T_i|X_0=i]}.$$ Pour toute fonction bornée $f\colon E\rightarrow \mathbb R$,$$\lim_{t\to+\infty}\frac1t\int_0^tf(X_s)ds= \sum_{i\in E}\lambda_i f(i).$$ 
+
+---
+
+## Ok, ok  et moi dans tout ça ?
+
+```{r, echo=FALSE,out.width="500px",fig.show='hold',fig.align='center'}
+  knitr::include_graphics(c("Lynx_lynx_poing.jpg"), dpi = 100)
+```
+
+---
+
+## Processus de Poisson
+
+- parmi les modèles de Markov à temps continu certains présentent des structures particulières
+- reprenons l'exemple du nombre de passages devant un dispositif permettant de photographier l'animal, une vision simpliste consiste à imaginer que le nombre  de passage au cours du temps est celle d'un processus de Markov homogène, si on appelle $T_n$ les instants de saut du processus avec $X_0=0$, cela revient à dire que  conditionnellement à $X_{T_n}=i$, la variable $T_{n+1}-T_n$ suit une loi exponentielle de paramètre $\lambda$
+- la situation est bien plus simple car la chaîne incluse est déterministe, on passe à chaque saut d'un entier au suivant
+- tellement simple que la loi de $X_t$ est usuelle :
+$$X_t \sim \mathcal P(\lambda t)$$
+
+---
+
+## Remarques
+
+- nous nous sommes limités à des chaînes homogènes (en temps, voire avec les processus de Poisson en temps et en espace), on peut avoir des lois différentes sur les temps de saut mais on perd le caractère homogène
+- par exemple pour un processus de sauts, on peut imaginer que la probabilité de saut en temps petit dépend du temps
+  $$\mathbb P(X_{t+h}-X_t=1)\stackrel{h\to 0}{\sim}\lambda(t)h$$
+on peut ici réussir à montrer que $X_t-X_s\sim \mathcal P(\Lambda(t)-\Lambda(s))$ où $\Lambda(t)=\int_0^t\lambda(s)ds$,  pour simuler un tel processus on considère un processus homogène $Y$ d'intensité 1, alors en changeant l'échelle des temps, on obtient $$Y_{\Lambda(t)} \sim \mathcal P(\Lambda(t))$$
+
+
+---
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+# Temps discret, espace d'états infini indénombrable
+
+---
+
+## Loi normale 
+```{r, warning=FALSE, fig.align='center', out.width = '800px', out.height= '500px', echo=FALSE, eval=TRUE}
+x <- seq(-6, 10, by=.01)
+lx <- length(x)
+sig <- c(.3,.5,1,2,3)
+ls <- length(sig)
+normdst <- function(x,sig){
+  f=dnorm(x, mean = 2, sd = sig)
+  return(f)
+}
+z <- outer(x,sig,normdst)
+z <- matrix(z, ncol=1)
+df <- data.frame( x = x, b = rep(paste0(" = ", sig), each = lx), z = z)
+normgf <- df %>% 
+  plot_ly(x = ~x, y = ~z, hoverinfo = "text", showlegend = FALSE) %>% 
+  layout(yaxis = list(title = "Densité"))
+normgf <- normgf %>% 
+  add_trace(frame = ~b, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
+  animation_opts(1000, easing = "elastic", redraw = FALSE) %>%
+  animation_button(
+    x = 1, xanchor = "right", y = 0, yanchor = "bottom"
+  ) %>%
+  animation_slider(
+    currentvalue = list(prefix = "sigma ", font = list(color="orange")
+)
+  )
+htmltools::save_html(normgf, file="normgf.html")  
+```
+
+<div align="center">
+<iframe src="normgf.html" width="1000" height="400" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+</div>
+
+
+- la densité d'une loi normale de paramètre $\mu$ et $\sigma^2$ est donnée par $$\frac{e^{-\frac{(x-\mu)^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}, \quad \forall x\in\mathbb R$$
+- il y a énormément de résultats remarquables sur les familles de variables aléatoires gaussiennes que nous ne pourrons pas lister dans le détail
+
+
+---
+
+## Vaste monde
+
+- si on considère une chaîne de Markov  homogène $(X_n)_{n\in\mathbb N}$ sur l'espace d'états  $\mathbb R$, la loi de $X_1$ sachant $X_0=x$ est alors donnée par les **densités de transitions** $y\mapsto p(x,y)$
+$$\mathbb P(a\leq X_1\leq b|X_0=x)=\int_a^b p(x,y)dy$$
+- une classe usuelle de processus homogène est fournie par les **processus linéaires** ou **processus auto-régressifs d'ordre 1** ou plus brièvement **AR(1)**
+$$X_n = \mu+\varphi(X_{n-1}-\mu) + \varepsilon_n,$$
+où 
+  + $\mu$ et $\varphi$ sont deux réels, avec comme hypothèse $|\varphi|<1$
+  + le bruit $(\varepsilon_n)_{n\in\mathbb N}$ est une suite de variables aléatoires décorrélées centrées de variance $\sigma^2$,
+  + la variable aléatoire $X_0$ est gaussienne indépendante de $(\varepsilon_n)_{n\in\mathbb N}$
+- dans cet exemple la loi de $X_1$ conditionnellement à $X_0$ est gaussienne $\mathcal N(aX_0+b, \sigma^2)$, 
+  ainsi $$p(x,y) = \frac{e^{-\frac{\|y-ax-b\|^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}$$
+- il se trouve que les conditions garantissent le fait que $X_n$ est gaussienne, que le processus est markovien, homogène, récurrent (au sens où partant de n'importe quel $x$, le processus revient une infinité de fois à proximité de $x$), convergent vers la loi invariante $\mathcal N\left(\mu, \tfrac{\sigma^2}{1-\varphi^2}\right)$ 
+
+---
+## AR(1) gaussien
+
+-Supposons de plus  
+  + $\mu$ et $\varphi$ sont deux réels, avec comme hypothèse $|\varphi|<1$
+  + le bruit $(\varepsilon_n)_{n\in\mathbb N}$ est une suite de variables aléatoires **normales** décorrélées centrées de variance $\sigma^2$,
+  + la variable aléatoire $X_0$ est gaussienne indépendante de $(\varepsilon_n)_{n\in\mathbb N}$
+- alors  la loi de $X_1$ conditionnellement à $X_0$ est $\mathcal N(aX_0+b, \sigma^2)$, 
+  ainsi $$p(x,y) = \frac{e^{-\frac{\|y-ax-b\|^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}$$
+- il se trouve que les conditions garantissent le fait que $X_n$ est gaussienne, que le processus est markovien, homogène, récurrent (au sens où partant de n'importe quel $x$, le processus revient une infinité de fois à proximité de $x$), convergent vers la loi invariante $\mathcal N\left(\mu, \tfrac{\sigma^2}{1-\varphi^2}\right)$ 
+
+---
+## Processus gaussien en temps discret
+
+>### Définition 
+> un processus stochastique $(X_n)_{n\in \mathbb N}$ est dit **gaussien** si pour toute liste finie d'indices $n_1,\dots,n_k\in\mathbb N$ et de réels  $a_1,\dots, a_n$ la variable $$\sum_{i=1}^ka_iX_{n_i}$$ suit une loi normale
+
+>## Propriété
+> un processus gaussien est entièrement caractérisé par la donnée des fonctions moyenne $m$ et covariance $K$, $$m(n)=\mathbb E[X_n],\quad K(n,m)=\textrm{Cov}(X_n,X_m)$$ en particulier $X_n \sim \mathcal N(m(n), K(n,n))$
+
+- ce raisonnement reste vrai en temps continu
+---
+
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+# Temps continu, espace d'états infini indénombrable
+
+
+---
+## Processus gaussien en temps continu
+
+>### Définition 
+> un processus stochastique $(X_t)_{t\in \mathbb R}$ est dit **gaussien** si pour toute liste finie d'instants $t_1,\dots,t_k\in \mathbb R^+$ et de réels  $a_1,\dots, a_n$ la variable $$\sum_{i=1}^ka_iX_{t_i}$$ suit une loi normale
+
+>### Propriété
+> un processus gaussien est entièrement caractérisé par la donnée des fonctions moyenne $m$ et covariance $K$, $$m(t)=\mathbb E[X_t],\quad K(s,t)=\textrm{Cov}(X_s,X_t)$$
+
+---
+## Mouvement brownien
+
+- attribué à R.Brown en 1827
+- approches mathématiques : L.Bachelier en 1901 et N.Wiener en 1923
+
+>### Définition 
+> un mouvement brownien est un processus aléatoire $(B_t)_{t\in \mathbb R^+}$ tel que
+> - $B_t-B_s$ indépendant $(B_u)_{u\in [0,s]}$ 
+> - $B_t-B_s \sim \mathcal N(0,t-s)$
+> - les trajectoires sont continues (presque sûrement)
+
+- l'existence de $B$ garantie comme limite 
+$$B_t = tN_0+ \sum_{k=1}^{+\infty} \frac{\sqrt 2}{2\pi k}(N_k (\cos(2\pi k t)-1) + N'_k\sin(2\pi k t))$$ où $(N_k)_{k\in\mathbb N}$ et $(N_k)_{k\in\mathbb N}$ sont deux familles indépendantes de variables IID $\mathcal N(0,1)$
+- le mouvement brownien satisfait la propriété de Markov mais est **récurrent nul**
+
+---
+
+## Processus d'Ornstein-Uhlenbeck
+
+>### Définition
+> le processus d'**Ornstein-Uhlenbeck** est la solution de l'**équation différentielle stochastique** suivante 
+$$dX_t = \theta(\mu-X_t)dt+\sigma dB_t,$$
+où $B$ est un mouvement brownien, $\theta,\sigma>0$.
+
+- pour comprendre l'équation, la solution peut être approchée à l'aide du **schéma d'Euler** de discrétisation (pour $\Delta t$ petit)
+$$\hat x_{(k+1)\Delta t} = \hat x_{k\Delta t} + \theta(\mu-\hat x_{k\Delta t})\Delta t + \sigma\Delta B_{k\Delta t},$$ où $(\Delta B)$ suite IID $\mathcal N(0,\Delta t)$
+- une forme explicite peut être obtenue $$X_t = X_0e^{-\theta t} +\mu(1-e^{-\theta t}) + \frac{\sigma}{\sqrt{2\theta}}B(e^{2\theta t})e^{-\theta t}$$ en "intégrant" l'équation
+- par construction, le processus possède la propriété de Markov
+
+---
+
+## Loi de $X_t$
+
+- si $X_0$ est de loi normale, alors $X$ est un processus gaussien tel que pour tout 
+- le processus est **homogène**, si $p_{s,t}(x,y)$ est la *densité de transition* c'est-à-dire la loi de $X_t$ sachant $X_s=x$, alors : $$p_{s,t}(x,y)=p_{0,t-s}(x,y), $$ c'est la densité d'une loi normale d'espérance $xe^{-\theta(t-s)}$ et de variance $\frac{\sigma^2}{2\theta}(1-e^{-2\theta(t-s)})$ 
+- en notant $P_t(x,y) = p_{0,t}(x,y)$ la densité de la loi de $X_t$ sachant $X_0$, alors 
+    $$\frac{\partial  P_t(x,y)}{\partial t} = LP_t(x,y) := \frac{\sigma^2}2\frac{\partial^2  P_t(x,y)}{\partial x^2} -\theta(x-\mu) \frac{\partial  P_t(x,y)}{\partial x},$$ l'opérateur $L$  est appelé **générateur** du processus par extension du cas en espace d'états discret
+
+---
+## Comportement en temps long
+
+- si $X_0\sim\mathcal N(\mu,\frac{\sigma^2}{2\theta})$, alors $X$ est un processus gaussien tel que pour tout $0\leq s\leq t$ $$X_t\sim\mathcal N\left(\mu,\frac{\sigma^2}{2\theta}\right),\quad \textrm{Cov}\big(X_s,X_t\big) = \frac{\sigma^2}{2\theta}e^{-\theta(t-s)}$$
+- en considérant $\pi$ la densité de $X_0$ ci-dessus, on montre que $$\pi(y) = \int_{\mathbb R} P_t(x,y)\pi(x)dx$$ c'est donc bien la probabilité stationnaire au sens généralisant ce qui a été vu précédemment
+- le processus est également **récurrent**, au sens où partant de n'importe quel $x$, le processus revient une infinité de fois à proximité de $x$
+- il satisfait également un théorème ergodique :$$\lim_{t\to+\infty} \frac{1}{t}\int_0^tf(X_s)ds=\int_{\mathbb R}f(x)\pi(x)dx$$
+
+---
+
+## Processus non-homogènes
+
+- le processus d'Ornstein-Uhlenbeck est le seul processus gaussien de markov et homogène possédant en temps continu 
+- les équations différentielles reposant sur un mouvement brownien permettent de définir des processus qui possèdent encore la propriété de Markov, l'intégration a tendance à lisser les trajectoires générées par le brownien pour que le processus d'intérêt puisse présenter des trajectoires plus ou moins régulières, on parle de **diffusions**
+
+
+---
+## Références
+
+- Berglund, Nils *Théorie des Probabilités*. <a href="https://www.idpoisson.fr/berglund/probamass_html/probamass_html.html">`https://www.idpoisson.fr/berglund/probamass_html/probamass_html.html`</a>. 2005.
+- Friedman, Avner. Stochastic differential equations and applications. In : Stochastic differential equations. Berlin, Heidelberg : Springer Berlin Heidelberg, 1975. p. 75-148.
+- Grunwald, Gary K., Hyndman Rob J., Tedesco Leanne M. *A unified view of linear AR(1) models* <a href="https://robjhyndman.com/papers/ar1.pdf">`https://robjhyndman.com/papers/ar1.pdf`</a>. 1996.
+- Klebaner, Fima C. *Introduction to stochastic calculus with applications*. World Scientific Publishing Company, 2012.
+- Karatzas, Ioannis and Shreve, Steven, *Brownian motion and stochastic calculus*. Vol. 113. Springer Science & Business Media, 1991.
+- Legland, François *Introduction au Filtrage en Temps Discret*. <a href="https://www.irisa.fr/aspi/legland/ens/cours.pdf">`https://www.irisa.fr/aspi/legland/ens/cours.pdf`</a>. 2005.
+- Löcherbach, Eva *Ergodicity and speed of convergence to equilibrium for diffusion processes*. <a href="https://eloecherbach.u-cergy.fr/cours.pdf">`https://eloecherbach.u-cergy.fr/cours.pdf`</a>. 2015.
+- Norris, James R. *Markov Chains*, Cambridge university press, 1998. 
+- Ycart, Bernard *Modèles et Algorithmes Markoviens*. Springer, 2002.

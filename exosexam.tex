@@ -1,0 +1,86 @@
+\documentclass[10pt,fleqn, svgnames]{article}
+\usepackage{amsfonts,amssymb}
+%\usepackage{euscript}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{lmodern}
+\usepackage[frenchb]{babel}
+\usepackage{xspace}
+\usepackage{mathtools}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage[body={160mm,230mm}, a4paper,centering]{geometry}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots,filecontents}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc,positioning,backgrounds}
+\usepgfplotslibrary{colormaps}
+\usepackage{xcolor}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor,colortbl}
+\usepackage{marvosym}
+
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\z}{\mathbb{Z}}
+\newcommand{\n}{\mathbb{N}}
+\newcommand{\q}{\mathbb{Q}}
+
+\theoremstyle{definition}
+\newtheorem{exo}{Exercice}
+
+ 
+
+\setlength{\hoffset}{-25pt}         
+\setlength{\voffset}{-40pt}         
+
+\begin{document}
+\begin{exo}
+On s’int\'eresse \`a une forêt compos\'ee de deux esp\`eces d’arbres, $E_1$ et $E_2$. Lorsqu’un arbre meurt, un nouveau grandit \`a
+sa place mais il peut être de l’une ou l’autre des deux esp\`eces. Ceux de la premi\`ere esp\`ece
+ayant une longue dur\'ee de vie, on suppose que 1\% d’entre eux meurt chaque ann\'ee alors
+que ce taux est de 5\% pour la deuxi\`eme esp\`ece. Mais ces derniers grandissant plus rapidement r\'eussiront plus souvent \`a occuper une place laiss\'ee vacante : on suppose que 75\%
+des places vacantes sont prises par un arbre de la deuxi\`eme esp\`ece contre seulement 25\%
+pour un arbre de la premi\`ere esp\`ece.
+\begin{enumerate}
+\item Expliquer comment l'occupation d'un emplacement de cette foret peut être modélisé par une chaîne
+de Markov $(X_t)_{t\geq 0}$ \`a deux \'etats $E_1$ et $E_2$ et justifier la formule suivante :
+$$\mathbb P(X_{t+1} = E_1|X_t = E_1)=0, 99 + 0, 01 \times 0, 25 = 0, 9925.$$
+\item En d\'eduire la matrice de transition P de la chaîne de Markov .
+\item Tracer le graphe correspondant.
+%~ \item Supposons que la probabilité d'avoir au début de l'étude un arbre d'espèce $E_1$ soit $\mu_1 = .1$, pour chaque espèce, déterminer les probabilités d'avoir un arbre  de cette espèce au bout de trois ans.
+\item $\pi_1 = \begin{pmatrix}0, 625 &0, 375\end{pmatrix}$ est-elle une distribution stationnaire pour cette chaîne de Markov ?
+\item $\pi_2 = \begin{pmatrix}0, 01 &0, 99\end{pmatrix}$ est-elle une distribution stationnaire pour cette chaîne de Markov ?
+\item Que peut-on en déduire quand au comportement de la forêt en temps long ?
+\end{enumerate}
+\end{exo}
+
+\begin{exo}
+	On considère une chaîne de Markov $(Xn)_{n\geq0}$ sur $\{1, \dots, 7\}$ de matrice de transition $Q$
+donnée par
+$$Q =
+\begin{pmatrix}
+\frac12 &\frac14 &0 &\frac14 &0 &0 &0 \\
+\frac12 &0 &0 &0 &0 &0 &\frac12\\
+0& 0 &\frac18 &0 &\frac78 &0 &0\\
+\frac14 &0 &0 &0 &0 &0 &\frac34\\
+0 &\frac19 &\frac79 &0 &0 &\frac19 &0\\
+0 &0 &0 &0 &0 &1 &0\\
+0 &0 &0 &1 &0 &0 &0\end{pmatrix}$$
+\begin{enumerate}
+\item Dessiner le graphe de la chaîne de Markov associée en précisant les probabilités de transitions
+entre les différents états.
+\item Déterminer les classes d’états récurrents et transitoires.
+\item La chaîne est-elle irréductible ?
+\item Calculer $\mathbb P_3(X_2 = 6)$ et $\mathbb P_1(X_2 = 7)$ (où $\mathbb P_i$ désigne la probabilité sachant que $X_0=i$).
+\end{enumerate}
+\end{exo}
+
+
+\end{document}

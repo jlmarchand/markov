@@ -1,0 +1,151 @@
+\documentclass[10pt,fleqn, svgnames]{article}
+\usepackage{amsfonts,amssymb}
+%\usepackage{euscript}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{lmodern}
+\usepackage[frenchb]{babel}
+\usepackage{xspace}
+\usepackage{mathtools}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage[body={160mm,230mm}, a4paper,centering]{geometry}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots,filecontents}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc,positioning,backgrounds}
+\usepgfplotslibrary{colormaps}
+\usepackage{xcolor}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor,colortbl}
+\usepackage{marvosym}
+
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\z}{\mathbb{Z}}
+\newcommand{\n}{\mathbb{N}}
+\newcommand{\q}{\mathbb{Q}}
+
+\theoremstyle{definition}
+\newtheorem{exo}{Exercice}
+
+ 
+
+\setlength{\hoffset}{-25pt}         
+\setlength{\voffset}{-40pt}         
+
+
+
+
+
+\usepackage[
+	backend=biber,
+    style=authoryear
+    ]{biblatex}
+\addbibresource{biblio.bib}
+
+\begin{document}
+
+
+\begin{center}
+  {\large
+    {\bf Examen ALEA }
+
+   }
+
+  \bigskip
+  {\em Tout document autorisé, durée 2h }
+
+
+\end{center}
+
+
+
+\begin{exo}
+On s’int\'eresse \`a une forêt compos\'ee de deux esp\`eces d’arbres, $E_1$ et $E_2$. 
+Lorsqu’un arbre meurt, un nouveau grandit \`a
+sa place mais il peut être de l’une ou l’autre des deux esp\`eces. 
+On suppose que 1\% d'arbres de l'espèce $E_1$ meurent  chaque ann\'ee alors
+que ce taux est de 5\% pour la deuxi\`eme esp\`ece. 
+L'espèce $E_2$ est une espèce pionnière et r\'eussit plus souvent \`a occuper une place laiss\'ee vacante : on suppose qu'en moyenne 75\%
+des places vacantes sont prises par un arbre de la deuxi\`eme esp\`ece contre seulement 25\% pour un arbre de la premi\`ere esp\`ece.
+\begin{enumerate}
+\item On s'intéresse à un emplacement en particulier de la forêt. Si il est occupé par un arbre de l'espèce $E_1$ l'année $t$, quels sont  les mécanismes qui peuvent aboutir au fait qu'il y a encore un arbre de l'espèce $E_1$ l'année $t+1$ ?
+\item Justifier la formule suivante :
+$$\mathbb P(X_{t+1} = E_1|X_t = E_1)=0, 99 + 0, 01 \times 0, 25 = 0, 9925.$$ Quelles hypothèses biologiques ont été implicitement faites lorsqu'on écrit cette formule ?
+\item Expliquer comment l'occupation d'un emplacement de cette forêt peut être modélisé par une chaîne
+de Markov $(X_t)_{t\geq 0}$ \`a deux \'etats $E_1$ et $E_2$ et 
+\item En d\'eduire la matrice de transition P de la chaîne de Markov .
+\item Tracer le graphe correspondant.
+%~ \item Supposons que la probabilité d'avoir au début de l'étude un arbre d'espèce $E_1$ soit $\mu_1 = .1$, pour chaque espèce, déterminer les probabilités d'avoir un arbre  de cette espèce au bout de trois ans.
+\item $\pi_1 = \begin{pmatrix}0, 625 &0, 375\end{pmatrix}$ est-elle une distribution stationnaire pour cette chaîne de Markov ?
+\item $\pi_2 = \begin{pmatrix}0, 01 &0, 99\end{pmatrix}$ est-elle une distribution stationnaire pour cette chaîne de Markov ?
+\item Que peut-on en déduire quant au comportement de la forêt en temps long ?
+\end{enumerate}
+\end{exo}
+
+\begin{exo}
+	On considère une chaîne de Markov $(X_n)_{n\geq0}$ sur $\{1, \dots, 7\}$ de matrice de transition $Q$
+donnée par
+$$Q =
+\begin{pmatrix}
+\frac12 &\frac14 &0 &\frac14 &0 &0 &0 \\
+\frac12 &0 &0 &0 &0 &0 &\frac12\\
+0& 0 &\frac18 &0 &\frac78 &0 &0\\
+\frac14 &0 &0 &0 &0 &0 &\frac34\\
+0 &\frac19 &\frac79 &0 &0 &\frac19 &0\\
+0 &0 &0 &0 &0 &1 &0\\
+0 &0 &0 &1 &0 &0 &0\end{pmatrix}$$
+\begin{enumerate}
+\item Dessiner le graphe de la chaîne de Markov associée en précisant les probabilités de transitions
+entre les différents états.
+\item Déterminer les classes d’états récurrents et transitoires.
+\item La chaîne est-elle irréductible ?
+\item Calculer $\mathbb P(X_2 = 6\vert X_0 =3)$ et $\mathbb P(X_2 = 7\vert X_0 = 1)$.
+\end{enumerate}
+\end{exo}
+
+
+
+
+\begin{exo}
+\textcite{distiller2020using} propose un modèle pour analyser des données issus de pièges photographiques afin de comprendre d'analyser les activités des jaguars à Bélize. Le but de cet exercice est de reprendre quelques éléments de leur approche.
+
+\paragraph{Un seul jaguar sur la zone de suivi.}
+
+Un piège photographique prend une photo dès que le capteur de mouvement est activé. On note les instants $t_1, \ldots,t_n$ de "captures" (au sens de on a pris une photo) du jaguar présent sur la zone. On propose de modéliser ces instants de captures par un processus ponctuels d'intensité $\mu$ (intensité exprimée en captures par heure).
+
+\begin{enumerate}
+\item Quelles sont les hypothèses biologiques sous-jacentes à ce choix de modélisation ?
+\item Combien de photos de jaguars en moyenne observe-t-on si le piège photographique est déployé pendant une journée ? (Donner l'expression en fonction de mu).
+\item D'un jour à l'autre, le nombre de captures est variable. Quelle est la loi du nombre de captures journalières ?
+\item Proposer une modification du modèle permettant de prendre en compte le faite que l'activité diurne et l'activité nocture du jaguar soient différentes.
+\item Le jaguar est un animal territorial qui quitte rarrement son territoire. L'intensité $\mu$ de captures définie précédemment correspond à un piège posé au centre du territoire du jaguar. On imagine que le taux capture s'atténue avec la distance $d$ entre le  piège et le centre d'activité du jaguar selon un coefficient d'atténuation $e^{-d^2/2}.$ Donner l'intensité du processus ponctuel qui décrit les captures en prenant en compte l'atténuation.
+\end{enumerate}  
+ 
+\paragraph{Deux jaguars sur la zone de suivi.}
+\begin{enumerate}
+\item Dessiner une réalisation possible du processus ponctuel correspondant aux captures sur une zone contenant deux jaguars (en faisant dans un premier temps abstraction de la notion de territoire et d'un changement de rythme dans la journée). Vous pourrez utiliser deux couleurs pour représenter les captures correspondants à chaque jaguar.
+\item Si les jaguars ne sont pas identifiés individuellement (on ne distingue pas les couleurs du schéma précédent), combien en moyenne de photos sont prises en une journée.
+\item Quelle est l'intensité du   processus ponctuels qui donne les instants de détection ?
+\item Si le jaguar $1$ a le centre de son territoire à une distance $d_1$ du piège photo et le jaguar $2$ a une distance $d_2$, si on prend aussi en compte les changements d'activités du jaguar selon la journée, quel modèle proposez-vous pour représenter les temps où une photo de jaguar est prise ?
+\end{enumerate}
+
+Ce sont les idées que vous avez développées dans cet exercice qui sont à l'origine du papier de \textcite{distiller2020using}.
+
+
+
+\end{exo}
+
+
+
+\printbibliography
+
+
+\end{document}

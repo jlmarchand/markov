@@ -1,0 +1,154 @@
+\documentclass[10pt,fleqn]{article}
+\usepackage{amsfonts,amssymb}
+%\usepackage{euscript}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{lmodern}
+\usepackage[frenchb]{babel}
+\usepackage{xspace}
+\usepackage{mathtools}
+%\usepackage{here}
+%\usepackage{fullpage}
+\usepackage{comment}
+%\usepackage{enumerate}
+%\usepackage{caption}
+%\usepackage{theorem}
+\usepackage{graphicx}
+\usepackage[body={160mm,230mm}, a4paper,centering]{geometry}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots,filecontents}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc,positioning,backgrounds}
+\usepgfplotslibrary{colormaps}
+\usepackage{xcolor}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor,colortbl}
+\usepackage{marvosym}
+
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\z}{\mathbb{Z}}
+\newcommand{\n}{\mathbb{N}}
+\newcommand{\q}{\mathbb{Q}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\sh}{\mathrm{sh}}
+\newcommand{\Argsh}{\mathop{\mathrm{argsh}}\nolimits}
+%\newcounter{exos}
+%\renewcommand\theexos{\arabic{exos}}|
+%\newenvironment{exos}
+%{\par\refstepcounter{exos}\medskip\noindent\textsc{\bf Exercice \theexos}\space}
+%{\par}
+%\newcounter{prob}
+%\renewcommand\theprob{\arabic{prob}}
+%\newenvironment{prob}
+%{\par\refstepcounter{prob}\medskip\noindent\textsc{Problème \theprob}\space}
+%{\par}
+ \theoremstyle{definition}
+ \newtheorem{exo}{Exercice}
+
+ 
+
+\setlength{\hoffset}{-25pt}         
+\setlength{\voffset}{-40pt}         
+
+\begin{document}
+		\thispagestyle{empty}
+	\tikzstyle{mybox} = [draw=gray!60!black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=1	pt, inner ysep=8pt]
+	\tikzstyle{fancytitle} =[fill=blue!60!black, text=white]
+	%~ \begin{multicols}{2}
+	%~ \begin{description}
+	%~ \item[NOM :]
+	%~ \item[PRENOM :]
+%~ \end{description}\end{multicols}
+
+	\noindent\begin{tikzpicture}
+	\node [mybox]  (UR2){%
+		\begingroup
+			\setlength{\tabcolsep}{1pt} % Default value: 6pt
+			\renewcommand{\arraystretch}{1} % Default value: 1	
+			\Large
+			\begin{tabular}{ccccc}
+				\multirow{ 3}{*}{\includegraphics[width=4cm]{/home/marchand/ownCloud/AgroCampus/AgroL1/Poly/FIGURES/INSTITUT_AGRO}} & &&&\\
+				&\phantom{AAAAAA}&&\phantom{AAAAAA}&Master 2 MODE\\&&&&\\
+				&&\textbf{ALEA}&&\\
+				&&TP 1 &&
+			\end{tabular}
+		\endgroup
+	};
+\end{tikzpicture}~\\
+
+\begin{exo}
+	Considérons une chaîne de Markov sur un espace d'états $\mathcal E$ à 6 états dont la matrice de transition est donnée par 
+	$$P=
+	\begin{pmatrix}
+		1/2 &\dots &0 &0 &0 &0 \\
+		\dots &2/3 &0 &0 &0 &0\\
+		0 &0 &\dots &0 &7/8 &0\\
+		1/4 &1/4 &0 &\dots &1/4 &1/4\\
+		0 &0 &3/4 &0 &\dots &0\\
+		0 &1/5 &0 &1/5 &1/5 &\dots
+	\end{pmatrix}
+	$$
+	\begin{enumerate}
+		\item compléter la matrice $M$
+		\item tracer le graphe de transition
+		\item montrer que $\mathbb P(T_4<+\infty|X_0=4)\leq \mathbb P(X_1=6|X_0=4)$
+		\item déterminer la nature des états
+		\item à l'aide des fonctions \verb!t()! et  \verb!eigen()!, déterminer les probabilités invariantes pour  $P$ 
+		\item[]{}\emph{pour rappel - ou pas - un \textbf{vecteur propre} ou \textbf{eigenvector} $V$ d'une matrice carrée $M$ est un vecteur non-nul tel que $MV=\lambda V$ où $\lambda$ est un réel appelé \textbf{valeur propre} ou \textbf{eigenvalue}}
+		\item interpréter le nombre de solutions ainsi que les solutions elles-même
+		\item créer une fonction \verb!traj()! qui prend en entrée une position initiale et un temps final, et enregistre en sortie l'ensemble d'une trajectoire simulée (on pourra utiliser les fonctions \verb!multinom()! et \verb!which!)
+		\item calculer $P^{1000}$ (on pourra utiliser la commande \verb!P%^%1000! qui nécessite le package \verb!expm!)
+		\item interpréter le résultat
+	\end{enumerate}
+\end{exo}
+		
+\begin{exo}
+	Soit une chaîne de Markov sur un espace d'états à 4 états dont la matrice de transition est donnée par
+	$$
+	P=
+	\begin{pmatrix}
+		1  &0 &0 &0 \\
+		1/2 &0 &1/2 &0\\
+		0 &1/2 &0 &1/2\\		
+		0 &0 &0 &1
+	\end{pmatrix}
+	$$
+	\begin{enumerate}	
+		\item déterminer la classe des états
+		\item après renumérotation des états, déterminer une approximation de $P^n$ lorsque $n$ est grand
+	\end{enumerate}
+\end{exo}
+
+\begin{exo}
+La modélisation de propagation d'une infection dans une population peut se faire à l'aide de chaînes de Markov.
+\begin{enumerate}
+	\item considérons un modèle à compartiments SI (un individu est Susceptible d'être infecté, ou déjà Infecté), appelons $p_I$ la probabilité qu'un individu infecté contamine une personne saine, et considérons le processus qui compte le nombre de personnes infectées au cours du temps
+		\begin{enumerate} 
+			\item expliquer en quoi une chaîne de Markov permettrait de représenter la dynamique
+			\item simuler des trajectoires de $I$ et $S$
+			\item quel est le comportement en temps long du nombre d'infectés ?
+		\end{enumerate}
+	\item considérons un modèle à compartiments SIR  (on rajoute les personnes qui ont Recouvré, elles sont supposées immunes par la suite), et supposons que les malades guérissent au bout d'une itération
+		\begin{enumerate} 
+			\item expliquer en quoi une chaîne de Markov permettrait de représenter la dynamique
+			\item simuler des trajectoires de $I$ , $S$ et $R$
+			\item quel est le comportement en temps long du nombre d'infectés ?
+		\end{enumerate}	
+	\item  supposons maintenant qu'un malade guérisse avec  probabilité $p_R$
+		\begin{enumerate} 
+			\item expliquer en quoi une chaîne de Markov permettrait de représenter la dynamique
+			\item simuler des trajectoires de $I$, $S$ et $R$
+			\item quel est le comportement en temps long du nombre d'infectés ?
+			%~ \item 
+		\end{enumerate}	
+\end{enumerate}
+\end{exo}
+\end{document}
+

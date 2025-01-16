@@ -301,7 +301,7 @@ body {
   background-color: #FFFFFF;
   background-repeat: no-repeat;
   background-position: middle center;
-  background-size: 1100px;
+  background-size: 2100px;
   color: #272822;
 }
 blockquote {
@@ -452,7 +452,7 @@ on fait un pas en avant avec probabilité \(\tfrac12\) sinon un  pas en arrière
 <hr />
 <h2 id="cha-ne-homog-ne"><span class="section-number">3.2</span> Chaîne homogène</h2>
 <blockquote>
-<h4 id="d-finition-une-cha-ne-de-markov-x-n-n-in-mathbb-n-sur-un-espace-d-tats-fini-e-est-dite-homog-ne-si"><span class="section-number">3.2.0.1</span> Définition : une chaîne de Markov \((X_n)_{n\in\mathbb N}\) sur un espace d’états fini \(E\) est dite <strong>homogène</strong> si</h4>
+<h3 id="d-finition-une-cha-ne-de-markov-x-n-n-in-mathbb-n-sur-un-espace-d-tats-fini-e-est-dite-homog-ne-si"><span class="section-number">3.2.1</span> Définition : une chaîne de Markov \((X_n)_{n\in\mathbb N}\) sur un espace d’états fini \(E\) est dite <strong>homogène</strong> si</h3>
 </blockquote>
 <p>$$\mathbb P(X_{n+1} = j|X_n=i)=\mathbb P(X_{1} = j|X_0=i)=p_{ij}$$</p>
 <ul>
@@ -466,7 +466,7 @@ $$\mathbb P(X_{n+1} =1|X_n=1)=\tfrac1n, \quad \mathbb P(X_{n+1} =1|X_n=0)=\tfrac
 <hr />
 <h2 id="matrice-de-passage"><span class="section-number">3.3</span> Matrice de passage</h2>
 <blockquote>
-<h4 id="d-finition-la-matrice-de-passage-p-d-une-cha-ne-de-markov-x-n-n-in-mathbb-n-homog-ne-sur-un-espace-d-tats-fini-e-est-la-matrice-dont-les-coefficients-sont-les-p-ij"><span class="section-number">3.3.0.1</span> Définition : la <strong>matrice de passage</strong> \(P\) d’une chaîne de Markov \((X_n)_{n\in\mathbb N}\) homogène sur un espace d’états fini \(E\) est la matrice dont les coefficients sont les \(p_{ij}\)</h4>
+<h3 id="d-finition-la-matrice-de-passage-p-d-une-cha-ne-de-markov-x-n-n-in-mathbb-n-homog-ne-sur-un-espace-d-tats-fini-e-est-la-matrice-dont-les-coefficients-sont-les-p-ij"><span class="section-number">3.3.1</span> Définition : la <strong>matrice de passage</strong> \(P\) d’une chaîne de Markov \((X_n)_{n\in\mathbb N}\) homogène sur un espace d’états fini \(E\) est la matrice dont les coefficients sont les \(p_{ij}\)</h3>
 </blockquote>
 <ul>
 <li>exemple : retour au développement d’une forêt naturelle, il s’agit d’une Chaîne de Markov homogène sur l’espace d’états \(S = \{h, a, f \}\)</li>
@@ -634,7 +634,7 @@ ainsi pour revenir en un même état, il faut réaliser un nombre pair d’étap
 $$PGCD(4,6,8)=2,\quad PGCD(36,96,48,24)=12,\quad PGCD(96,48,24)=24$$</li>
 </ul>
 <blockquote>
-<h4 id="d-finition-la-p-riode-d-un-tat-i-est-donn-e-par"><span class="section-number">3.8.0.1</span> Définition : la <strong>période</strong> d’un état \(i\) est donnée par</h4>
+<h3 id="d-finition-la-p-riode-d-un-tat-i-est-donn-e-par"><span class="section-number">3.8.1</span> Définition : la <strong>période</strong> d’un état \(i\) est donnée par</h3>
 </blockquote>
 <p>$$d(i)=PGCD\big(n\geq 1\colon (P^n)_{ii}&gt;0\Big)$$
 si \(d(i)\geq 2\), l’état est <strong>périodique</strong> de période \(d(i)\) sinon (lorsque \(d(i)=1\)) l’état est dit <strong>apériodique</strong>. Une chaîne <strong>apériodique</strong> est une chaîne dont tous les états sont apériodiques.</p>
@@ -659,13 +659,15 @@ $$\begin{array}{ll}\pi P&amp;= (\lim_{n\to\infty}\mu P^n)P\\&amp;=\lim_{n\to\inf
 <blockquote>
 <h4 id="d-finition-une-loi-de-probabilit-sur-e-est-dite-invariante-ou-stationnaire-pour-une-cha-ne-de-matrice-de-transition-p-si-elle-est-solution-de-pi-p-pi"><span class="section-number">3.9.0.1</span> Définition : une loi de probabilité sur \(E\) est dite <strong>invariante</strong> ou <strong>stationnaire</strong> pour une chaîne de matrice de transition \(P\) si elle est solution de $$\pi P=\pi.$$</h4>
 </blockquote>
+<hr />
 <h3 id="cons-quences"><span class="section-number">3.9.1</span> Conséquences</h3>
 <blockquote>
 <h4 id="propri-t-si-pi-est-une-loi-stationnaire-et-si-i-est-un-tat-transitoire-alors-pi-i-0"><span class="section-number">3.9.1.1</span> Propriété : si \(\pi\) est une loi stationnaire et si \(i\) est un état transitoire, alors \(\pi_i=0\)</h4>
 </blockquote>
 <blockquote>
-<h4 id="th-or-me-tout-cha-ne-de-markov-homog-ne-sur-espace-d-tats-fini-admet-au-moins-une-loi-de-probabilit-stationnaire-lorsque-la-cha-ne-est-irr-ductible-cette-loi-est-unique-et-pi-i-frac1-mathbb-e-t-i-x-0-i-gt-0-enfin-si-la-cha-ne-est-la-fois-irr-ductible-et-ap-riodique-alors-la-matrice-p-n-converge-vers-la-matrice-dont-toutes-les-lignes-sont-gales-l-unique-loi-stationnaire-pi"><span class="section-number">3.9.1.2</span> Théorème : tout chaîne de Markov homogène sur espace d’états fini admet au moins une loi de probabilité stationnaire. Lorsque la chaîne est irréductible cette loi est unique et $$\pi_i=\frac1{\mathbb E[T_i|X_0=i]}&gt;0.$$ Enfin, si la chaîne est à la fois <strong>irréductible et apériodique</strong> alors la matrice \(P^n\) converge vers la matrice dont toutes les lignes sont égales à l’unique loi stationnaire \(\pi\).</h4>
+<h4 id="th-or-me-tout-cha-ne-de-markov-homog-ne-sur-espace-d-tats-fini-admet-au-moins-une-loi-de-probabilit-stationnaire-lorsque-la-cha-ne-est-irr-ductible-cette-loi-est-unique-et-pi-i-frac1-mathbb-e-t-i-x-0-i-gt-0-enfin-si-la-cha-ne-est-la-fois-irr-ductible-et-ap-riodique-alors-la-matrice-p-n-converge-vers-la-matrice-dont-toutes-les-lignes-sont-gales-l-unique-loi-stationnaire-pi-ainsi-quelle-que-soit-la-loi-initiale"><span class="section-number">3.9.1.2</span> Théorème : tout chaîne de Markov homogène sur espace d’états fini admet au moins une loi de probabilité stationnaire. Lorsque la chaîne est irréductible cette loi est unique et $$\pi_i=\frac1{\mathbb E[T_i|X_0=i]}&gt;0.$$ Enfin, si la chaîne est à la fois <strong>irréductible et apériodique</strong> alors la matrice \(P^n\) converge vers la matrice dont toutes les lignes sont égales à l’unique loi stationnaire \(\pi\). Ainsi quelle que soit la loi initiale</h4>
 </blockquote>
+<p>$$\lim_{n\to+\infty}\mathbb P(X_n=i)=\pi_i$$</p>
 <hr />
 <h2 id="premier-bilan"><span class="section-number">3.10</span> Premier bilan</h2>
 <ul>
@@ -739,11 +741,11 @@ Si  la chaine est  <strong>irréductible récurrente nulle</strong>, il n’exis
 <hr />
 <h2 id="th-or-mes"><span class="section-number">4.3</span> Théorèmes</h2>
 <blockquote>
-<h4 id="th-or-me-ergodique"><span class="section-number">4.3.0.1</span> Théorème ergodique</h4>
+<h3 id="th-or-me-ergodique"><span class="section-number">4.3.1</span> Théorème ergodique</h3>
 </blockquote>
 <p>si \((X_n)_{n\geq 0}\) est une chaîne de Markov <strong>irréductible récurrente positive</strong> (et homogène) sur espace d’états fini, alors pour toute fonction \(f\) $$\mathbb P\left(\lim_{n\to\infty}\frac1n\sum_{k=1}^nf(X_k)=\sum_{i\in E}\pi_if(i)\right)=1.$$</p>
 <blockquote>
-<h4 id="th-or-me-de-convergence-vers-la-loi-stationnaire"><span class="section-number">4.3.0.2</span> Théorème de convergence vers la loi stationnaire</h4>
+<h3 id="th-or-me-de-convergence-vers-la-loi-stationnaire"><span class="section-number">4.3.2</span> Théorème de convergence vers la loi stationnaire</h3>
 </blockquote>
 <p>si la chaîne est <strong>irréductible apériodique et récurrente positive</strong> de mesure invariante \(\pi\),
 alors, pour toute mesure initiale \(\mu\) et pour tout état \(i\)

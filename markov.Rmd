@@ -1,7 +1,7 @@
 ---
 title: Chaînes de Markov
 author: "JL Marchand"
-date: "11/10/2023"
+date: "06/01/2025"
 output:
   markdown::html_format:
     meta:
@@ -9,7 +9,7 @@ output:
       js: [snap, "@npm/@xiee/utils/js/key-buttons.min.js,external-link.min.js,heading-anchor.min.js"]
     options:
       toc: 
-        depth: 3
+        depth: 2
       number_sections: true
 header-includes:
 - \usepackage{booktabs}
@@ -55,7 +55,7 @@ body {
   background-color: #FFFFFF;
   background-repeat: no-repeat;
   background-position: middle center;
-  background-size: 1100px;
+  background-size: 2100px;
   color: #272822;
 }
 blockquote {
@@ -562,7 +562,7 @@ $$\mathbb P(X_{n+1}= i_{n+1}|X_{n}= i_{n},X_{n-1}= i_{n-1},\dots,X_0=i_0)=\mathb
 
 ## Chaîne homogène
 
->#### Définition : une chaîne de Markov $(X_n)_{n\in\mathbb N}$ sur un espace d'états fini $E$ est dite **homogène** si
+>### Définition : une chaîne de Markov $(X_n)_{n\in\mathbb N}$ sur un espace d'états fini $E$ est dite **homogène** si
 $$\mathbb P(X_{n+1} = j|X_n=i)=\mathbb P(X_{1} = j|X_0=i)=p_{ij}$$
 
 - autrement dit les **probabilités de transition** sont constantes au cours du temps
@@ -576,7 +576,7 @@ $$\mathbb P(X_{n+1} =1|X_n=1)=\tfrac1n, \quad \mathbb P(X_{n+1} =1|X_n=0)=\tfrac
 ---
 
 ## Matrice de passage
->#### Définition : la **matrice de passage** $P$ d'une chaîne de Markov $(X_n)_{n\in\mathbb N}$ homogène sur un espace d'états fini $E$ est la matrice dont les coefficients sont les $p_{ij}$
+>### Définition : la **matrice de passage** $P$ d'une chaîne de Markov $(X_n)_{n\in\mathbb N}$ homogène sur un espace d'états fini $E$ est la matrice dont les coefficients sont les $p_{ij}$
 
 - exemple : retour au développement d'une forêt naturelle, il s'agit d'une Chaîne de Markov homogène sur l'espace d'états $S = \{h, a, f \}$
 
@@ -750,8 +750,8 @@ ainsi pour revenir en un même état, il faut réaliser un nombre pair d'étapes
 
 - rappel (ou pas) : le PGCD d'un ensemble d'entiers est le plus grand diviseur commun de tous les entiers de l'ensemble considéré :
 $$PGCD(4,6,8)=2,\quad PGCD(36,96,48,24)=12,\quad PGCD(96,48,24)=24$$
->#### Définition : la **période** d'un état $i$ est donnée par
-$$d(i)=PGCD(n\geq 1\colon (P^n)_{ii}>0$$
+>### Définition : la **période** d'un état $i$ est donnée par
+$$d(i)=PGCD\big(n\geq 1\colon (P^n)_{ii}>0\Big)$$
 si $d(i)\geq 2$, l'état est **périodique** de période $d(i)$ sinon (lorsque $d(i)=1$) l'état est dit **apériodique**. Une chaîne **apériodique** est une chaîne dont tous les états sont apériodiques.
 
 - par exemple :   
@@ -770,11 +770,14 @@ $$\begin{array}{ll}\pi P&= (\lim_{n\to\infty}\mu P^n)P\\&=\lim_{n\to\infty}\mu P
 
 >#### Définition : une loi de probabilité sur $E$ est dite **invariante** ou **stationnaire** pour une chaîne de matrice de transition $P$ si elle est solution de $$\pi P=\pi.$$
 
+---
+
 ### Conséquences 
 
 >#### Propriété : si $\pi$ est une loi stationnaire et si $i$ est un état transitoire, alors $\pi_i=0$
 
->#### Théorème : tout chaîne de Markov homogène sur espace d'états fini admet au moins une loi de probabilité stationnaire. Lorsque la chaîne est irréductible cette loi est unique et $$\pi_i=\frac1{\mathbb E[T_i|X_0=i]}>0.$$ Enfin, si la chaîne est à la fois **irréductible et apériodique** alors la matrice $P^n$ converge vers la matrice dont toutes les lignes sont égales à l'unique loi stationnaire $\pi$.
+>#### Théorème : tout chaîne de Markov homogène sur espace d'états fini admet au moins une loi de probabilité stationnaire. Lorsque la chaîne est irréductible cette loi est unique et $$\pi_i=\frac1{\mathbb E[T_i|X_0=i]}>0.$$ Enfin, si la chaîne est à la fois **irréductible et apériodique** alors la matrice $P^n$ converge vers la matrice dont toutes les lignes sont égales à l'unique loi stationnaire $\pi$. Ainsi quelle que soit la loi initiale
+$$\lim_{n\to+\infty}\mathbb P(X_n=i)=\pi_i$$
 
 ---
 
@@ -854,10 +857,10 @@ Si  la chaine est  **irréductible récurrente nulle**, il n'existe pas de proba
 
 ## Théorèmes 
 
->#### Théorème ergodique 
+>### Théorème ergodique 
 si $(X_n)_{n\geq 0}$ est une chaîne de Markov **irréductible récurrente positive** (et homogène) sur espace d'états fini, alors pour toute fonction $f$ $$\mathbb P\left(\lim_{n\to\infty}\frac1n\sum_{k=1}^nf(X_k)=\sum_{i\in E}\pi_if(i)\right)=1.$$ 
 
->#### Théorème de convergence vers la loi stationnaire
+>### Théorème de convergence vers la loi stationnaire
 si la chaîne est **irréductible apériodique et récurrente positive** de mesure invariante $\pi$,
 alors, pour toute mesure initiale $\mu$ et pour tout état $i$
 $$lim_{n\to\infty}
